@@ -1,0 +1,54 @@
+<div class="w-full min-h-screen bg-gradient-to-tr from-amber-400 via-orange-700 to-rose-700 p-0">
+  <div class="w-full text-center py-8">
+    <h1 class="font-extrabold text-4xl sm:text-5xl text-white drop-shadow-lg tracking-wide">A COMER RICO</h1>
+    <p class="font-bold text-lg text-orange-100 mt-2">Detalles de la receta</p>
+  </div>
+  <div class="max-w-2xl mx-auto px-5 mb-6">
+    <button (click)="goBack()" class="mb-6 px-6 py-2 bg-white/70 text-orange-800 rounded-xl hover:bg-orange-100 transition font-bold shadow">← Volver</button>
+  </div>
+  <div class="bg-white/80 rounded-3xl max-w-2xl mx-auto my-4 px-3 md:px-10 py-8 shadow-2xl">
+    @if (loading()) {
+      <div class="flex flex-col items-center justify-center min-h-48 py-8">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-orange-700 mb-4"></div>
+        <p class="text-xl text-orange-700 font-semibold">Cargando detalles ...</p>
+      </div>
+    }@else if (error()) {
+      <div class="text-center p-8 text-red-600 bg-red-100 border border-red-400 rounded-xl shadow-lg">
+        <p class="font-bold text-lg mb-3">¡Ocurrió un error!</p>
+        <p class="text-base">{{error()}}</p>
+      </div>
+    }@else if (recipeDetail()) {
+      <div class="flex flex-col md:flex-row gap-8 mb-5">
+        <div class="md:w-2/5 mb-6 md:mb-0 flex-shrink-0 flex justify-center items-center">
+          <img class="w-full max-h-72 rounded-xl shadow object-cover border-4 border-orange-300" [src]="recipeDetail()!.src" alt="Receta: {{recipeDetail()!.name}}">
+        </div>
+        <div class="md:w-3/5 flex flex-col gap-5">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-orange-900 mb-2">{{recipeDetail()!.name}}</h2>
+          <div class="flex gap-4 mb-2">
+            <div class="bg-orange-200 rounded-xl px-4 py-2 text-orange-800 font-semibold shadow">
+              <span>Tiempo: {{recipeDetail()!.time}} min</span>
+            </div>
+            <div class="bg-yellow-100 rounded-xl px-4 py-2 text-yellow-900 font-mono shadow">
+              <span>ID: {{recipeDetail()!.id}}</span>
+            </div>
+          </div>
+          <div class="bg-orange-50 rounded-lg shadow-inner p-4">
+            <p class="text-gray-700 text-lg">{{recipeDetail()!.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 bg-rose-50 rounded-xl p-6 shadow-inner">
+        <h3 class="text-xl font-bold text-orange-900 mb-2">Preparación:</h3>
+        <div class="text-base text-gray-800 whitespace-pre-line leading-relaxed">{{recipeDetail()!.instructions}}</div>
+      </div>
+      <div class="mt-8 flex gap-4 justify-end">
+        <a [routerLink]="'/recipes/edit/' + recipeId()" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-800 font-semibold shadow transition">Editar</a>
+        <button (click)="delete()" class="px-6 py-2 bg-red-600 text-white rounded-xl hover:bg-red-800 font-semibold shadow transition">Eliminar</button>
+      </div>
+    }@else {
+      <div class="text-center p-8 text-2xl text-gray-600 bg-gray-100 border border-gray-400 rounded-lg shadow-md">
+        <p class="font-bold">No se pudo cargar los detalles de la receta.</p>
+      </div>
+    }
+  </div>
+</div>

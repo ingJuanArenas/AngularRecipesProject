@@ -1,0 +1,17 @@
+<div class="w-full min-h-screen bg-gradient-to-tr from-amber-400 via-orange-700 to-rose-700 p-0">
+  <div class="w-full text-center py-8">
+    <h1 class="font-extrabold text-4xl sm:text-5xl text-white drop-shadow-lg tracking-wide">A COMER RICO</h1>
+    <p class="font-bold text-lg text-orange-100 mt-2">¿Qué te antoja hoy?</p>
+  </div>
+  <div class="max-w-xl mx-auto px-5 mb-6">
+    <input type="text" name="userInput" placeholder="Buscar recetas" [(ngModel)]="userInput"  class="w-full p-3 rounded-xl border-2 border-orange-400 bg-white shadow focus:outline-none focus:border-amber-600 text-base transition" />
+  </div>
+  <div class="bg-white/80 rounded-3xl max-w-screen-xl mx-auto my-4 px-3 md:px-10 py-8">
+    <p class="font-bold font-sans text-gray-800 text-xl mb-6">RECETAS DEL DÍA:</p>
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      @for (rec of recipes(); track $index) {
+        <app-recipe-card [recipe] = "rec" (showDetails)="showDetails($event)"></app-recipe-card>
+      }
+    </div>
+  </div>
+</div>
