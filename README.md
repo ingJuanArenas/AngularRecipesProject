@@ -1,59 +1,83 @@
 # Recetas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
+Aplicación web para gestión y visualización de recetas de cocina, construida con Angular. Permite listar, buscar, crear, editar y eliminar recetas fácilmente, mostrando detalles completos y fotografías.
 
-## Development server
+## Características principales
 
-To start a local development server, run:
+- Listado, búsqueda y filtrado de recetas.
+- Visualización de detalles e instrucciones paso a paso de cada receta.
+- Agregar, editar y eliminar recetas (CRUD básico).
+- Diseño responsivo y atractivo, utilizando Tailwind CSS.
 
-```bash
-ng serve
+## Tecnologías empleadas
+
+- [Angular 20+](https://angular.io/): framework principal para la SPA.
+- [Tailwind CSS](https://tailwindcss.com/): estilos y diseño responsivo.
+- [TypeScript](https://www.typescriptlang.org/): tipado de datos y robustez.
+- [RxJS](https://rxjs.dev/): gestión reactiva de datos.
+
+## Instalación y puesta en marcha
+
+1. Clona el repositorio y entra al directorio del proyecto:
+
+   ```bash
+   git clone <repo_url>
+   cd recetas
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicia la aplicación en desarrollo:
+
+   ```bash
+   npm start
+   # o equivalente: ng serve
+   ```
+
+4. Accede desde tu navegador a `http://localhost:4200/`
+
+## Scripts útiles
+
+- `ng serve` — Levanta el servidor de desarrollo.
+- `ng build` — Genera la versión de producción.
+- `ng test` — Ejecuta tests unitarios.
+
+## Estructura básica del proyecto
+
+```
+recetas/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── recipe-list/        # Listado y filtrado de recetas
+│   │   │   ├── recipe-card/        # Visualización individual
+│   │   │   ├── recipe-form/        # Formulario de alta y edición
+│   │   │   ├── features/           # Servicios lógicos (Recetas)
+│   │   │   └── models/             # Interfaces y tipos (Recipes)
+│   │   └── ...                    # Otros módulos/app principal
+│   └── ...
+├── package.json                    # Dependencias y scripts
+├── angular.json                    # Configuración de Angular
+├── tailwind.config.*               # Configuración de Tailwind
+└── README.md
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Contribuciones
 
-## Code scaffolding
+¡Las contribuciones son bienvenidas! Puedes abrir issues para sugerir mejoras/bugs o enviar Pull Requests.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Licencia
 
-```bash
-ng generate component component-name
-```
+Este proyecto es open source y se puede usar/editar libremente.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+### Autor: Equipo Recetas
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Este proyecto se generó con [Angular CLI](https://github.com/angular/angular-cli).
