@@ -24,12 +24,12 @@ export class RecipesDetails{
             const id = this.recipeId()
           if(id){
             const idnum = parseInt(id);
-            if (!isNaN(idnum)) {
-              this.getRecipeDetail(idnum)
-            }else{
-              this.error.set("ID de la receta invalido")
-              this.loading.set(false)
-            }
+              if (!isNaN(idnum)) {
+                this.getRecipeDetail(idnum)
+              }else{
+                this.error.set("ID de la receta invalido")
+                this.loading.set(false)
+              }
           }else{
             this.error.set("ID vacio")
              this.loading.set(false)
@@ -41,17 +41,15 @@ export class RecipesDetails{
 
    getRecipeDetail(id:number){
      this.recipeDetail.set(undefined)
-    this.error.set(undefined)
-    this.loading.set(true)
+      this.error.set(undefined)
+      this.loading.set(true)
 
-      this.service.getById(id)
-      .then(p=>{
-          this.recipeDetail.set(p);
+      this.service.getById(id).subscribe({
+        next: (data)=>{
+           this.recipeDetail.set(data);
           this.loading.set(false);
-      })
-      .catch(error =>{
-        this.error.set("Error al cargar los detalles");
-        this.loading.set(false);
+        },error: (err) => {this.error.set(err);this.loading.set(false);}
+         
       })
    }
     goBack(){
@@ -59,8 +57,17 @@ export class RecipesDetails{
     }
 
     delete(){
-      this.service.deleteRecipe(parseInt(this.recipeId()!));
-      alert("ELIMINADA EXITOSAMENTE!")
+
+       this.error.set(undefined)
+      this.loading.set(true)
+
+
+      this.service.deleteRecipe(parseInt(this.recipeId()!)).subscribe({
+        next: (data)=>{
+             alert("ELIMINADA EXITOSAMENTE!")
       this.goBack()
+        },error: (err) =>{ this.error.set(err);this.loading.set(false);}
+      });
+     
     }
 }
