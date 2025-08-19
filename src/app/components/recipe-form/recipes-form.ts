@@ -32,22 +32,20 @@ export class RecipesForm {
     effect(()=>{
         if(this.recipeId()){
           this.isEditMode.set(true)
-      this.loading.set(true);
-      this.error.set(undefined);
-      const id = parseInt(this.recipeId() ?? "0");
-      this.service.getById(id).then((data)=>{
+          this.loading.set(true);
+          this.error.set(undefined);
+                  const id = parseInt(this.recipeId() ?? "0");
+                  this.service.getById(id).subscribe({
+                    next: (data)=>{
+                      this.recipeForm.patchValue(data);
+                      this.loading.set(false)
+                    },error: (err) => { this.error.set(err); this.loading.set(false)}
+                  })
 
-        this.recipeForm.patchValue(data);
-        this.loading.set(false)
-      }).catch(error=> {
-                this.error.set(error);
-        this.loading.set(false)
-      });
-    }else{
-      this.isEditMode.set(false);
-      this.loading.set(false)
-    }
-
+        }else{
+          this.isEditMode.set(false);
+          this.loading.set(false)
+        }
     });
   }
 
@@ -60,29 +58,26 @@ export class RecipesForm {
   }
 
   saveData(){
+     const newRecipe = this.recipeForm.value as Recipes;
 
-    if (this.recipeForm.invalid) {
-      console.log("LLEGUE AQUI");
-      
-      alert("HAY DATOS INCORRECTOS, REVISA!!!")
-    }
-
-    const newRecipe = this.recipeForm.value as Recipes;
-
-    this.service.addNewRecipe(newRecipe);
-    alert("RECETA GUARDADA CORRECTAMENTE!!!")
-    this.goBack();
+    this.service.addNewRecipe(newRecipe).subscribe({
+      next: (data)=>{
+        alert("Guardado exitosamente!");
+        this.goBack()
+      }, error: (err) => { this.error.set(err); this.loading.set(false)}
+    })    
 
   }
 
   update(){
      const recipe = this.recipeForm.value as Recipes;
      const id= parseInt(this.recipeId()!);
-     this.service.updateRecipe(id,recipe);
-
-     alert("Actualizado exitosamente!");
-
-     this.goBack()
+     this.service.updateRecipe(id,recipe).subscribe({
+      next: (data)=>{
+          alert("Actualizado exitosamente!");
+          this.goBack()
+      },error:(err)=> { this.error.set(err); this.loading.set(false)}
+     });
   }
 }
 
