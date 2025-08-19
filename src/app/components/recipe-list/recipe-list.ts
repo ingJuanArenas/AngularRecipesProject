@@ -36,10 +36,12 @@ export class RecipeList implements OnInit  {
     }
 
     loading(){
-        this.service.getAllRecipes().then(data => {
+        this.service.getAllRecipes().subscribe({
+          next: (data)=>{
           this.tRecipes.set(data)
           this.recipes.set(this.tRecipes())
-    }).catch(error => this.error.set(error))
+          },error: (err)=>{this.error.set(err)}
+        })
     }
 
     showDetails(id: number){
